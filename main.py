@@ -16,7 +16,9 @@ DST = os.path.join(DST_DIR, "entry.png")
 def main():
     os.makedirs(DST_DIR, exist_ok=True)
     shutil.copyfile(SRC, DST)
-    print(f"Wrote {DST}")
+    size = os.path.getsize(DST)
+    assert size <= 1_048_576, f"entry.png is {size} bytes, over the 1 MiB cap"
+    print(f"Wrote {DST} ({size} bytes)")
 
 
 if __name__ == "__main__":
